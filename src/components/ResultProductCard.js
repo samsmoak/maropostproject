@@ -37,7 +37,7 @@ function ResultProductCard({ product }) {
 						{product.title}
 					</div>
 					<div className='flex space-x-4 font-Roboto'>
-						<div className='font-light line-through'>
+						<div className='font-light text-gray-500 line-through'>
 							{`${product.compare_at !== null ? "$ " : " "}`}
 							{product.compare_at}
 						</div>

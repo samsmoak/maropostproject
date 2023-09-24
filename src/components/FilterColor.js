@@ -17,7 +17,7 @@ const fetchData = async (url, setData, setIsLoading, setError) => {
 		setIsLoading(false);
 	}
 };
-function FilterColor() {
+function FilterColor({ selectedOption2, onSelectedOptionChange2 }) {
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState();
@@ -58,8 +58,9 @@ function FilterColor() {
 	const handleOptionChange = (value) => {
 		setSelectedOption(value);
 	};
-	const handleRadioChange = (optionId) => {
+	const handleRadioChange = (optionId, i) => {
 		setSelectedOption(optionId);
+		onSelectedOptionChange2(i);
 	};
 	const Color = [
 		{ name: "Black", value: "bg-black" },
@@ -165,7 +166,7 @@ function FilterColor() {
 										name='radioGroup'
 										value={d}
 										checked={selectedOption === d}
-										onChange={() => handleRadioChange(d)}
+										onChange={() => handleRadioChange(d, i.value)}
 										className='hidden'
 									/>
 									<span

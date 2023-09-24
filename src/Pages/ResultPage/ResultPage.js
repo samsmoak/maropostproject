@@ -6,7 +6,7 @@ import ResultProducts from "../../components/ResultProducts";
 
 function ResultPage() {
 	return (
-		<div className='w-screen flex  flex-col items-center md:flex  md:flex-row md:items-start'>
+		<div className='w-screen flex  flex-col items-center md:flex  md:flex-row md:items-start space-y-10'>
 			<ResultSideBar data='' />
 			<ResultProducts />
 		</div>

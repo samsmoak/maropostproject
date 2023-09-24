@@ -17,13 +17,14 @@ const fetchData = async (url, setData, setIsLoading, setError) => {
 		setIsLoading(false);
 	}
 };
-function FilterMaterial() {
+function FilterMaterial({ selectedOptions, onSelectedOptionsChange }) {
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState();
 	const [error, setError] = useState("");
 	const [displayedValues, setDisplayedValues] = useState([]);
 	const [startIndex, setStartIndex] = useState(0);
+	// const [selectedOptions, setSelectedOptions] = useState([]);
 	const itemsPerPage = 6;
 	const endOfList = startIndex + itemsPerPage >= data[0]?.values.length;
 	const apiUrl =
@@ -52,6 +53,19 @@ function FilterMaterial() {
 		// Set the startIndex back to 0 to load the first six elements
 		setDisplayedValues([]);
 		setStartIndex(0);
+	};
+	const handleCheckboxChange = (option) => {
+		if (selectedOptions.includes(option)) {
+			// If the option is already selected, remove it from the array
+			const newSelectedOptions = selectedOptions.filter(
+				(item) => item !== option
+			);
+			onSelectedOptionsChange(newSelectedOptions);
+		} else {
+			// If the option is not selected, add it to the array
+			const newSelectedOptions = [...selectedOptions, option];
+			onSelectedOptionsChange(newSelectedOptions);
+		}
 	};
 
 	return (
@@ -110,6 +124,9 @@ function FilterMaterial() {
 									<input
 										type='checkbox'
 										id='myCheckbox'
+										value={i.value}
+										checked={selectedOptions.includes(i.value)}
+										onChange={() => handleCheckboxChange(i.value)}
 										className='absolute h-6 w-6 accent-gray-50 focus:border-black focus:border-4  ring-white  bg-grey-200 text-red-500 cursor-pointer'
 									/>
 								</div>
