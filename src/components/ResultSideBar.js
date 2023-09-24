@@ -5,7 +5,7 @@ import FilterPrize from "./FilterPrize";
 
 function ResultSideBar(props) {
 	return (
-		<div className='w-96 px-5 space-y-3'>
+		<div className='w-full md:w-96 px-5 space-y-3 font-Roboto uppercase'>
 			<div className='shadow-sm '>Filters</div>
 			<div className='space-y-1'>
 				<FilterMaterial data={props.data} />

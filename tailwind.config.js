@@ -80,6 +80,7 @@ module.exports = {
 				body: ['"Open Sans"'],
 				ArchitectDaughter: ["Architects Daughter", "cursive"],
 				Yanone_Kaffeesatz: ["Yanone Kaffeesatz", "sans-serif"],
+				Roboto: ["Roboto", "sans-serif"],
 			},
 
 			borderRadius: {
@@ -95,6 +96,14 @@ module.exports = {
 					"100%": { transform: "translateX(-550px )" },
 				},
 			},
+		},
+		screens: {
+			xs: "400px", // Below 400px
+			sm: "500px", // 500px - 767px
+			md: "768px", // 768px - 990px  2
+			lg: "992px", // 991px - 1279px 3
+			xl: "1280px", // 1280px and up 4
+			xxl: "3440px",
 		},
 	},
 	// plugins: [require("@tailwindcss/forms")],

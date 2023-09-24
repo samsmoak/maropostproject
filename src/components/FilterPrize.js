@@ -52,27 +52,39 @@ function FilterPrize() {
 			</div>
 
 			<div className={`w-full mt-4 ${!open && "hidden"}`}>
-				<div className='flex w-full justify-between '>
-					<div className='space-x-6'>
-						<div>
-							<input
-								type='checkbox'
-								id='myCheckbox'
-								className='absolute h-6 w-6 accent-gray-50 focus:border-black focus:border-4 ring-white  bg-grey-800 text-white bg cursor-pointer'
-							/>
-						</div>
-						<div>
-							<label
-								htmlFor='myCheckbox'
-								className={`cursor-pointer w-full ml-2
-								}`}
-							>
-								Prize
-							</label>
-						</div>
+				<div className='w-full'>
+					<div>
+						<input
+							id='small-range'
+							type='range'
+							class='w-full h-1 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-700'
+							min='0'
+							max='50'
+						/>
 					</div>
 
-					<div>(num) </div>
+					<div className='flex space-x-4 font-light items-center w-full justify-center'>
+						<div className='flex space-x-2 items-center'>
+							<button className='py-2 px-3 border'>$299</button>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke-width='1.5'
+								stroke='currentColor'
+								class='w-6 h-6'
+							>
+								<path
+									stroke-linecap='round'
+									stroke-linejoin='round'
+									d='M19.5 12h-15'
+								/>
+							</svg>
+
+							<button className='py-2 px-3 border'>$1266</button>
+						</div>
+						<div className='text-lg font-medium'>go</div>
+					</div>
 				</div>
 			</div>
 		</div>

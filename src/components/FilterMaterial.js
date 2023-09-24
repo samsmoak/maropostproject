@@ -34,7 +34,7 @@ function FilterMaterial() {
 	}, [apiUrl]);
 
 	useEffect(() => {
-		// Update the displayed values when facetsData changes
+		// Update the displayed values when data changes
 		if (data.length > 0) {
 			const nextValues = data[0].values.slice(
 				startIndex,
@@ -55,7 +55,7 @@ function FilterMaterial() {
 	};
 
 	return (
-		<div className='shadow-sm'>
+		<div className='shadow-sm font-Roboto'>
 			<div>
 				<button
 					className='flex w-full justify-between py-3 '
@@ -103,14 +103,14 @@ function FilterMaterial() {
 			</div>
 			<div>
 				{displayedValues.map((i, d) => (
-					<div className={`w-full mt-4 ${!open && "hidden"}`}>
-						<div className='flex w-full justify-between '>
+					<div className={`w-full mt-4 ${!open && "hidden"}`} key={d}>
+						<div className='flex w-full justify-between font-Roboto text-sm capitalize  '>
 							<div className='space-x-6'>
 								<div>
 									<input
 										type='checkbox'
 										id='myCheckbox'
-										className='absolute h-6 w-6 accent-gray-50 focus:border-black focus:border-4 ring-white  bg-grey-200 text-red-500 cursor-pointer'
+										className='absolute h-6 w-6 accent-gray-50 focus:border-black focus:border-4  ring-white  bg-grey-200 text-red-500 cursor-pointer'
 									/>
 								</div>
 								<div>
@@ -124,17 +124,51 @@ function FilterMaterial() {
 								</div>
 							</div>
 
-							<div>(num) </div>
+							<div>{i.count} </div>
 						</div>
 					</div>
-				))}{" "}
+				))}
 				<div className={`w-full mt-4 ${!open && "hidden"}`}>
 					{endOfList && startIndex > 0 && (
-						<button onClick={handleLoadLess}>Load Less</button>
+						<button
+							onClick={handleLoadLess}
+							className='font-normal w-full text-sm flex justify-center items-center'
+						>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								viewBox='0 0 24 24'
+								fill='currentColor'
+								class='w-4 h-4'
+							>
+								<path
+									fill-rule='evenodd'
+									d='M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z'
+									clip-rule='evenodd'
+								/>
+							</svg>
+							Less
+						</button>
 					)}
 					{data.length > 0 &&
 						startIndex + itemsPerPage < data[0].values.length && (
-							<button onClick={handleLoadMore}>Load More</button>
+							<button
+								onClick={handleLoadMore}
+								className='font-normal w-full text-sm flex justify-center items-center'
+							>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									viewBox='0 0 24 24'
+									fill='currentColor'
+									class='w-4 h-4'
+								>
+									<path
+										fill-rule='evenodd'
+										d='M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z'
+										clip-rule='evenodd'
+									/>
+								</svg>
+								More
+							</button>
 						)}
 				</div>
 			</div>

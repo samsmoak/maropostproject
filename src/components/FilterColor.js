@@ -58,6 +58,9 @@ function FilterColor() {
 	const handleOptionChange = (value) => {
 		setSelectedOption(value);
 	};
+	const handleRadioChange = (optionId) => {
+		setSelectedOption(optionId);
+	};
 
 	return (
 		<div className='shadow-sm'>
@@ -68,7 +71,7 @@ function FilterColor() {
 						setOpen(!open);
 					}}
 				>
-					<div>Material</div>
+					<div>Colors</div>
 					{open ? (
 						<div>
 							<svg
@@ -109,7 +112,7 @@ function FilterColor() {
 			<div>
 				{displayedValues.map((i, d) => (
 					<div className={`w-full mt-4 ${!open && "hidden"}`}>
-						<div className='flex w-full justify-between '>
+						{/* <div className='flex w-full justify-between '>
 							<div className='space-x-6'>
 								<div>
 									<input
@@ -117,7 +120,7 @@ function FilterColor() {
 										value={i.value}
 										checked={selectedOption === i.value}
 										onChange={() => handleOptionChange(i.value)}
-										className='absolute h-6 w-6 '
+										className='absolute h-5 w-5 checked:bg-red-400 '
 									/>
 								</div>
 								<div>
@@ -131,17 +134,91 @@ function FilterColor() {
 								</div>
 							</div>
 
-							<div>(num) </div>
-						</div>
+							<div>{i.count} </div>
+						</div> */}
+						{
+							<label
+								key={d}
+								className={`relative cursor-pointer select-none inline-block mr-4 ${
+									selectedOption === d ? "text-gray-500" : "text-red-500"
+								}`}
+							>
+								<input
+									type='radio'
+									name='radioGroup'
+									value={d}
+									checked={selectedOption === d}
+									onChange={() => handleRadioChange(d)}
+									className='hidden'
+								/>
+								<span
+									className={`w-6 h-6 border-2 rounded-full inline-block mr-2 ${
+										selectedOption === d
+											? "bg-gray-500 border-gray-500"
+											: "bg-red-500 border-red-500"
+									}`}
+								>
+									{selectedOption === d && (
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											viewBox='0 0 20 20'
+											fill='currentColor'
+											className='text-white w-4 h-4 mx-auto my-auto'
+										>
+											<path
+												fillRule='evenodd'
+												d='M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z'
+												clipRule='evenodd'
+											/>
+										</svg>
+									)}
+								</span>
+								label
+							</label>
+						}
 					</div>
 				))}
 				<div className={`w-full mt-4 ${!open && "hidden"}`}>
 					{endOfList && startIndex > 0 && (
-						<button onClick={handleLoadLess}>Load Less</button>
+						<button
+							onClick={handleLoadLess}
+							className='font-normal w-full text-sm flex justify-center items-center'
+						>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								viewBox='0 0 24 24'
+								fill='currentColor'
+								class='w-4 h-4'
+							>
+								<path
+									fill-rule='evenodd'
+									d='M5.25 12a.75.75 0 01.75-.75h12a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75z'
+									clip-rule='evenodd'
+								/>
+							</svg>
+							Less
+						</button>
 					)}
 					{data.length > 0 &&
 						startIndex + itemsPerPage < data[1].values.length && (
-							<button onClick={handleLoadMore}>Load More</button>
+							<button
+								onClick={handleLoadMore}
+								className='font-normal w-full text-sm flex justify-center items-center'
+							>
+								<svg
+									xmlns='http://www.w3.org/2000/svg'
+									viewBox='0 0 24 24'
+									fill='currentColor'
+									class='w-4 h-4'
+								>
+									<path
+										fill-rule='evenodd'
+										d='M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z'
+										clip-rule='evenodd'
+									/>
+								</svg>
+								More
+							</button>
 						)}
 				</div>
 			</div>
