@@ -7,7 +7,7 @@ function MainLayout() {
 	return (
 		<div className=''>
 			<Navbar />
-			<div className='w-full h-full'>
+			<div className='mt-5 w-full h-full'>
 				<Routess />
 			</div>
 		</div>

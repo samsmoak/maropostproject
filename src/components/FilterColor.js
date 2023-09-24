@@ -61,6 +61,22 @@ function FilterColor() {
 	const handleRadioChange = (optionId) => {
 		setSelectedOption(optionId);
 	};
+	const Color = [
+		{ name: "Black", value: "bg-black" },
+		{ name: "Blue", value: "bg-blue-500" },
+		{ name: "Grey", value: "bg-gray-500" },
+		{ name: "White", value: "bg-white" },
+		{ name: "Multicolor", value: "bg-fuchsia-500" },
+		{ name: "Beige", value: "bg-amber-300" },
+		{ name: "Green", value: "bg-green-500" },
+		{ name: "brown", value: "bg-yellow-950" },
+		{ name: "yellow", value: "bg-yellow-500" },
+		{ name: "Red", value: "	bg-red-500" },
+		{ name: "Maroon", value: "bg-rose-950" },
+		{ name: "Pink", value: "bg-pink-500" },
+		{ name: "Orange", value: "bg-orange-500" },
+		{ name: "Purple", value: "bg-purple-500 " },
+	];
 
 	return (
 		<div className='shadow-sm'>
@@ -137,44 +153,47 @@ function FilterColor() {
 							<div>{i.count} </div>
 						</div> */}
 						{
-							<label
-								key={d}
-								className={`relative cursor-pointer select-none inline-block mr-4 ${
-									selectedOption === d ? "text-gray-500" : "text-red-500"
-								}`}
-							>
-								<input
-									type='radio'
-									name='radioGroup'
-									value={d}
-									checked={selectedOption === d}
-									onChange={() => handleRadioChange(d)}
-									className='hidden'
-								/>
-								<span
-									className={`w-6 h-6 border-2 rounded-full inline-block mr-2 ${
-										selectedOption === d
-											? "bg-gray-500 border-gray-500"
-											: "bg-red-500 border-red-500"
+							<div className='flex justify-between'>
+								<label
+									key={d}
+									className={`relative flex cursor-pointer select-none inline-block mr-4 ${
+										selectedOption === d ? "text-gray-500" : "text-red-500"
 									}`}
 								>
-									{selectedOption === d && (
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											viewBox='0 0 20 20'
-											fill='currentColor'
-											className='text-white w-4 h-4 mx-auto my-auto'
-										>
-											<path
-												fillRule='evenodd'
-												d='M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z'
-												clipRule='evenodd'
-											/>
-										</svg>
-									)}
-								</span>
-								label
-							</label>
+									<input
+										type='radio'
+										name='radioGroup'
+										value={d}
+										checked={selectedOption === d}
+										onChange={() => handleRadioChange(d)}
+										className='hidden'
+									/>
+									<span
+										className={`w-6 h-6 border-2 flex items-center justify-center rounded-full inline-block mr-2 ${
+											selectedOption === d ? "bg-gray-300 " : Color[d].value
+										}`}
+									>
+										{selectedOption === d && (
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												viewBox='0 0 24 24'
+												fill='currentColor'
+												class='w-6 h-6 text-black'
+											>
+												<path
+													fill-rule='evenodd'
+													d='M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z'
+													clip-rule='evenodd'
+												/>
+											</svg>
+										)}
+									</span>
+									<div className='text-black text-sm font-light capitalize'>
+										{i.value}
+									</div>
+								</label>
+								<div className='text-sm text-gray-500'>({i.count}) </div>
+							</div>
 						}
 					</div>
 				))}

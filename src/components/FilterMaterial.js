@@ -104,7 +104,7 @@ function FilterMaterial() {
 			<div>
 				{displayedValues.map((i, d) => (
 					<div className={`w-full mt-4 ${!open && "hidden"}`} key={d}>
-						<div className='flex w-full justify-between font-Roboto text-sm capitalize  '>
+						<div className='flex w-full justify-between font-Roboto  text-sm capitalize  '>
 							<div className='space-x-6'>
 								<div>
 									<input
@@ -116,7 +116,7 @@ function FilterMaterial() {
 								<div>
 									<label
 										htmlFor='myCheckbox'
-										className={`cursor-pointer w-full ml-2
+										className={`cursor-pointer w-full ml-2 
 								}`}
 									>
 										{i.value}
@@ -124,7 +124,7 @@ function FilterMaterial() {
 								</div>
 							</div>
 
-							<div>{i.count} </div>
+							<div className='text-gray-500'>({i.count})</div>
 						</div>
 					</div>
 				))}
