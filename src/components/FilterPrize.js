@@ -2,16 +2,12 @@ import React, { useState } from "react";
 
 function FilterPrize() {
 	const [open, setOpen] = useState(false);
-	const [isChecked, setIsChecked] = useState(false);
-	const toggleCheckbox = () => {
-		setIsChecked(!isChecked);
-	};
 
 	return (
-		<div>
+		<div className='shadow-sm'>
 			<div>
 				<button
-					className='flex w-full justify-between'
+					className='flex w-full justify-between py-3  '
 					onClick={() => {
 						setOpen(!open);
 					}}
@@ -54,49 +50,31 @@ function FilterPrize() {
 					)}
 				</button>
 			</div>
-			{open && (
-				<div className='w-full'>
-					<div className='flex '>
-						<div className='flex items-center space-x-2 w-full'>
+
+			<div className={`w-full mt-4 ${!open && "hidden"}`}>
+				<div className='flex w-full justify-between '>
+					<div className='space-x-6'>
+						<div>
 							<input
 								type='checkbox'
 								id='myCheckbox'
-								className='hidden'
-								value=''
-								checked={isChecked}
-								onChange={toggleCheckbox}
+								className='absolute h-6 w-6 accent-gray-50 focus:border-black focus:border-4 ring-white  bg-grey-800 text-white bg cursor-pointer'
 							/>
+						</div>
+						<div>
 							<label
 								htmlFor='myCheckbox'
-								className={`flex items-center cursor-pointer ${"bg-white border-gray-200 hover:border-gray-500"} border  w-6 h-6`}
-							>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									stroke={isChecked ? "white" : "black"}
-									className='w-5 h-6'
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth='2'
-										d='M5.75 12.25l5.5 5.5L18.25 7.75'
-									/>
-								</svg>
-							</label>
-							<label
-								htmlFor='myCheckbox'
-								className={`cursor-pointer w-full
+								className={`cursor-pointer w-full ml-2
 								}`}
 							>
-								Material
+								Prize
 							</label>
 						</div>
-						<div>(num)</div>
 					</div>
+
+					<div>(num) </div>
 				</div>
-			)}
+			</div>
 		</div>
 	);
 }

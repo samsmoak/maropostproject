@@ -1,22 +1,69 @@
-import React, { useState } from "react";
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+const fetchData = async (url, setData, setIsLoading, setError) => {
+	try {
+		// const cachedData = localStorage.getItem(url);
+		// if (cachedData) {
+		// 	setData(JSON.parse(cachedData));
+		// 	setIsLoading(false);
+		// } else {
+		const response = await axios.get(url);
+		// localStorage.setItem(url, JSON.stringify(response.data.facets));
+		setData(response.data.facets);
+		setIsLoading(false);
+		// }
+	} catch (err) {
+		setError(err);
+		setIsLoading(false);
+	}
+};
 function FilterMaterial() {
 	const [open, setOpen] = useState(false);
-	const [isChecked, setIsChecked] = useState(false);
-	const toggleCheckbox = () => {
-		setIsChecked(!isChecked);
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState();
+	const [error, setError] = useState("");
+	const [displayedValues, setDisplayedValues] = useState([]);
+	const [startIndex, setStartIndex] = useState(0);
+	const itemsPerPage = 6;
+	const endOfList = startIndex + itemsPerPage >= data[0]?.values.length;
+	const apiUrl =
+		"https://findify-assets.s3.amazonaws.com/test-task/test_response.json";
+
+	useEffect(() => {
+		fetchData(apiUrl, setData, setIsLoading, setError);
+	}, [apiUrl]);
+
+	useEffect(() => {
+		// Update the displayed values when facetsData changes
+		if (data.length > 0) {
+			const nextValues = data[0].values.slice(
+				startIndex,
+				startIndex + itemsPerPage
+			);
+			setDisplayedValues((prevValues) => [...prevValues, ...nextValues]);
+		}
+	}, [data, startIndex]);
+
+	const handleLoadMore = () => {
+		// Increment the startIndex by itemsPerPage to load more elements
+		setStartIndex(startIndex + itemsPerPage);
+	};
+	const handleLoadLess = () => {
+		// Set the startIndex back to 0 to load the first six elements
+		setDisplayedValues([]);
+		setStartIndex(0);
 	};
 
 	return (
-		<div>
+		<div className='shadow-sm'>
 			<div>
 				<button
-					className='flex w-full justify-between'
+					className='flex w-full justify-between py-3 '
 					onClick={() => {
 						setOpen(!open);
 					}}
 				>
-					<div>FilterMaterial</div>
+					<div>Material</div>
 					{open ? (
 						<div>
 							<svg
@@ -54,49 +101,43 @@ function FilterMaterial() {
 					)}
 				</button>
 			</div>
-			{open && (
-				<div className='w-full mt-4'>
-					<div className='flex w-full '>
-						<div className='flex items-center  w-full'>
-							<input
-								type='checkbox'
-								id='myCheckbox'
-								className='hidden'
-								value=''
-								checked={isChecked}
-								onChange={toggleCheckbox}
-							/>
-							<label
-								htmlFor='myCheckbox'
-								className={`flex items-center cursor-pointer  ${"bg-white border-gray-200 hover:border-gray-500"} border  w-6 h-6`}
-							>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									stroke={isChecked ? "white" : "black"}
-									className='w-5 h-6'
-								>
-									<path
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										strokeWidth='2'
-										d='M5.75 12.25l5.5 5.5L18.25 7.75'
+			<div>
+				{displayedValues.map((i, d) => (
+					<div className={`w-full mt-4 ${!open && "hidden"}`}>
+						<div className='flex w-full justify-between '>
+							<div className='space-x-6'>
+								<div>
+									<input
+										type='checkbox'
+										id='myCheckbox'
+										className='absolute h-6 w-6 accent-gray-50 focus:border-black focus:border-4 ring-white  bg-grey-200 text-red-500 cursor-pointer'
 									/>
-								</svg>
-							</label>
-							<label
-								htmlFor='myCheckbox'
-								className={`cursor-pointer w-full ml-2
+								</div>
+								<div>
+									<label
+										htmlFor='myCheckbox'
+										className={`cursor-pointer w-full ml-2
 								}`}
-							>
-								Material
-							</label>
+									>
+										{i.value}
+									</label>
+								</div>
+							</div>
+
+							<div>(num) </div>
 						</div>
-						<div>(num)</div>
 					</div>
+				))}{" "}
+				<div className={`w-full mt-4 ${!open && "hidden"}`}>
+					{endOfList && startIndex > 0 && (
+						<button onClick={handleLoadLess}>Load Less</button>
+					)}
+					{data.length > 0 &&
+						startIndex + itemsPerPage < data[0].values.length && (
+							<button onClick={handleLoadMore}>Load More</button>
+						)}
 				</div>
-			)}
+			</div>
 		</div>
 	);
 }
