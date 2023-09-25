@@ -33,7 +33,7 @@ function ResultSideBar(props) {
 	};
 
 	return (
-		<div className='w-full md:w-96 px-5 xl:w-big  space-y-3 font-Roboto uppercase'>
+		<div className='w-full md:w-96 px-5 xxl:w-big  space-y-3 font-Roboto uppercase'>
 			<div className='shadow-sm font-semibold '>Filters</div>
 			<div className='space-y-1 w-full'>
 				<FilterMaterial
