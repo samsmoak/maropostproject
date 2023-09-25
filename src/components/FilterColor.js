@@ -80,7 +80,7 @@ function FilterColor({ selectedOption2, onSelectedOptionChange2 }) {
 	];
 
 	return (
-		<div className='shadow-sm'>
+		<div className='shadow-sm w-full'>
 			<div>
 				<button
 					className='flex w-full justify-between py-3 '

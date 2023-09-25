@@ -7,10 +7,10 @@ function ResultProductCard({ product }) {
 	return (
 		<div
 			onClick={() => redirectToLink(product.product_url)}
-			className='cursor-pointer'
+			className='cursor-pointer w-full '
 		>
-			<div className='w-full  md:w-56 font-Roboto  '>
-				<div className='relative h-80 sm:h-64 md:h-80 flex items-start justify-start'>
+			<div className='    font-Roboto  '>
+				<div className='relative h-80 sm:h-64 md:h-80 xxl:w-full xxl:h-small2 flex items-start justify-start'>
 					<img
 						src={product.image_url}
 						alt=''
@@ -32,16 +32,16 @@ function ResultProductCard({ product }) {
 						</div>
 					)}
 				</div>
-				<div className='w-full flex flex-col items-center mt-4 space-y-4 '>
-					<div className='uppercase text-sm text-center font-Roboto'>
+				<div className='w-full flex flex-col  items-center mt-4 space-y-4 '>
+					<div className='w-full uppercase text-sm text-center font-Roboto'>
 						{product.title}
 					</div>
-					<div className='flex space-x-4 font-Roboto'>
-						<div className='font-light text-gray-500 line-through'>
+					<div className='w-full  justify-center flex space-x-4 font-Roboto'>
+						<div className=' text-center  font-light text-gray-500 line-through'>
 							{`${product.compare_at !== null ? "$ " : " "}`}
 							{product.compare_at}
 						</div>
-						<div className='font-Roboto'>$ {product.price}</div>
+						<div className='font-Roboto  text-center'>$ {product.price}</div>
 					</div>
 				</div>
 			</div>
